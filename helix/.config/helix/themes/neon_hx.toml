@@ -1,0 +1,20 @@
+inherits = "dracula"
+
+[ui]
+# REMOVE O FUNDO (Fica transparente igual ao Kitty)
+"ui.background" = {} 
+"ui.window" = { bg = {} }
+
+# AJUSTES VISUAIS (Para bater com o Kitty)
+"ui.text" = "#ffffff"
+"ui.cursor" = { bg = "#ff79c6", fg = "#000000" } 
+"ui.statusline" = { fg = "#ffffff", bg = "#44475a" }
+
+[palette]
+# Força as cores Neon
+cyan = "#8be9fd"
+pink = "#ff79c6"
+orange = "#ffb86c"
+purple = "#bd93f9"
+green = "#50fa7b"
+comment = "#6272a4"

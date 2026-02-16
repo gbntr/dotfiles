@@ -1,0 +1,4 @@
+[[mgr.prepend_keymap]]
+on   = [ "\\" ]
+run  = "plugin toggle-pane min-preview"
+desc = "Alternar Preview (Maximizar/Restaurar)"

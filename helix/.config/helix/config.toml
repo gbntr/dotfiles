@@ -1,0 +1,57 @@
+theme = "ashen"
+
+[editor]
+line-number = "absolute"
+mouse = false
+rulers = [80]
+bufferline = "multiple"
+auto-save = true
+auto-format = true
+color-modes = true
+
+
+[editor.lsp]
+auto-signature-help = false
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "file-name", "read-only-indicator", "file-modification-indicator"]
+right = ["position"]
+
+# --- ATALHOS ESTILO VS CODE ---
+
+[keys.insert]
+# Navegação por palavra (Ctrl+Seta)
+"C-left" = "move_prev_word_start"
+"C-right" = "move_next_word_start"
+
+# Seleção de texto (Shift+Seta)
+"S-left" = "extend_char_left"
+"S-right" = "extend_char_right"
+"S-up" = "extend_line_up"
+"S-down" = "extend_line_down"
+
+# Garantia das setas normais
+"up" = "move_line_up"
+"down" = "move_line_down"
+"left" = "move_char_left"
+"right" = "move_char_right"
+
+# Atalhos extras
+"C-s" = ":w"      # Salvar
+"C-v" = "paste_clipboard_after" # Colar (se quiser usar ctrl+v)
+
+[keys.normal]
+"C-s" = ":w"
+"S-left" = "extend_char_left"
+"S-right" = "extend_char_right"
+"S-up" = "extend_line_up"
+"S-down" = "extend_line_down"
+
+"A-space" = [":insert-output echo -n ' '"]
+"A-ret" = [":insert-output echo ''"]

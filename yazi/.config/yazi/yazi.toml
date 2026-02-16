@@ -1,0 +1,26 @@
+[opener]
+edit = [
+    { run = 'kitty -e /usr/bin/helix "$@"', orphan = true, desc = "Helix", for = "linux" }
+]
+
+spread = [
+    { run = 'kitty -e vd "$@"', orphan = true, desc = "Visidata", for = "linux" }
+]
+
+[open]
+rules = [
+    # Regra 1: Força bruta para arquivos vazios (inode/x-empty)
+    { mime = "inode/*", use = "edit" },
+    
+    # Regra 2: Seus arquivos CSV
+    { name = "*.csv", use = "spread" },
+    
+    # Regra 3: Textos gerais
+    { mime = "text/*", use = "edit" },
+    
+    # Regra 4: Fallback (Última tentativa)
+    { name = "*", use = "edit" }
+]
+
+[mgr]
+ratio = [1, 3, 4]

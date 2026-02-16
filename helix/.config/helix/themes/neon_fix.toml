@@ -1,0 +1,48 @@
+[ui]
+# Chaves Obrigatórias de Interface
+"ui.background" = {} 
+"ui.text" = "#ffffff"
+"ui.text.focus" = "#ffffff"
+
+# SELEÇÃO (O erro estava aqui, definimos todas as variantes para garantir)
+"ui.selection" = { bg = "#44475a" }
+"ui.selection.primary" = { bg = "#44475a" }
+
+# Cursor
+"ui.cursor" = { bg = "#ff79c6", fg = "#000000" }
+"ui.cursor.primary" = { bg = "#ff79c6", fg = "#000000" }
+"ui.cursor.match" = { fg = "#ffb86c", modifiers = ["bold"] }
+"ui.cursor.insert" = { bg = "#ffffff", fg = "#000000" }
+"ui.cursor.select" = { bg = "#ffb86c", fg = "#000000" }
+
+# Menus e Popups (Helix exige isso para autocompletar)
+"ui.popup" = { bg = "#282a36", fg = "#ffffff" }
+"ui.menu" = { bg = "#282a36", fg = "#ffffff" }
+"ui.menu.selected" = { bg = "#44475a", fg = "#ffffff" }
+"ui.help" = { bg = "#282a36", fg = "#ffffff" }
+"ui.window" = { fg = "#6272a4" }
+
+# Linhas e Status
+"ui.linenr" = { fg = "#6272a4" }
+"ui.linenr.selected" = { fg = "#8be9fd", modifiers = ["bold"] }
+"ui.statusline" = { fg = "#ffffff", bg = "#44475a" }
+"ui.statusline.inactive" = { fg = "#6272a4", bg = "#282a36" }
+"warning" = "#ffb86c"
+"error" = "#ff5555"
+"info" = "#8be9fd"
+"hint" = "#50fa7b"
+
+# SINTAXE (Rosa, Ciano, Laranja)
+"keyword" = "#ff79c6"
+"namespace" = "#8be9fd"
+"function" = "#8be9fd"
+"type" = "#8be9fd"
+"variable" = "#ffffff"
+"variable.other.member" = "#ffffff"
+"string" = "#ffb86c"
+"constant" = "#bd93f9"
+"comment" = "#6272a4"
+"operator" = "#ff79c6"
+"punctuation" = "#ffffff"
+"special" = "#ff79c6"
+"label" = "#ff79c6"
