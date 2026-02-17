@@ -75,10 +75,10 @@ environment {
     XCURSOR_THEME "Bibata-Modern-Ice"
 
     // Força Thunar e apps GTK a não desenharem a barra de título
-    GTK_CSD "0"
-    GTK_DECORATION_LAYOUT ":"
+    //GTK_CSD "0"
+    //GTK_DECORATION_LAYOUT ":"
     QT_QPA_PLATFORM "wayland;xcb"
-    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    //QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
     //GDK_BACKEND "x11"
 }
 
