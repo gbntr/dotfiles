@@ -1,8 +1,8 @@
-theme = "ashen"
+theme = "autumn_night"
 
 [editor]
-line-number = "absolute"
-mouse = false
+line-number = "relative"
+mouse = true
 rulers = [80]
 bufferline = "multiple"
 auto-save = true

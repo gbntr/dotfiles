@@ -1,8 +1,8 @@
 input {
     keyboard {
         xkb {
-            layout "br,us"
-            variant ",intl"
+            layout "us, br"
+            variant "intl,"
             //options "caps:escape,grp:alt_shift_toggle"
         }
         numlock
@@ -20,9 +20,10 @@ layout {
     background-color "#00000000"
     
     // Gaps (Espaçamento)
-    gaps 8
-
-    center-focused-column "never"
+    gaps 4
+    
+    center-focused-column "on-overflow"
+    always-center-single-column
 
     preset-column-widths {
         proportion 0.2
@@ -34,7 +35,7 @@ layout {
     }
 
     // 2 janelas dividem a tela.
-    default-column-width { proportion 1.0; }
+    default-column-width { proportion 0.5; }
 
     // Focus Ring (Desligado)
     focus-ring {
@@ -61,7 +62,12 @@ layout {
         color "#0007"
     }
     
-    struts {}
+    struts {
+        left 0 
+        top -28
+        bottom 0
+        right 0        
+    }
 }
 
 overview {
@@ -100,7 +106,8 @@ spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPL
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets,pkcs11,ssh"
 
 // Substituição Waybar/SwayNC por Noctalia
-spawn-at-startup "noctalia"
+spawn-at-startup "qs" "-c" "noctalia-shell"
+//spawn-at-startup "noctalia"
 
 //spawn-at-startup "swww-daemon"
 //spawn-at-startup "swww" "img" "/home/guilherme/Pictures/wallpapers/bluemontains.png" //"--resize-type" "stretch"
@@ -124,7 +131,7 @@ window-rule {
 }
 
 window-rule {
-    opacity 0.95
+    opacity 0.97
     match is-active=true
 }
 
@@ -144,6 +151,10 @@ window-rule {
     match app-id="zen"
     match app-id="zen-alpha"
     match app-id="navigator"
+    match app-id="browser"
+    match app-id="librewolf"
+    match app-id="brave"
+    match app-id="firefox"
 
     open-floating false
     default-column-width { proportion 1.0; }
@@ -194,7 +205,7 @@ binds {
         spawn "kitty" "--class" "floating" "-o" "remember_window_size=no" "-o" "initial_window_width=800" "-o" "initial_window_height=500";
     }
 
-    Mod+D { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+D { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
 
     // SEUS ATALHOS PERSONALIZADOS
     Mod+E hotkey-overlay-title="nemo" { spawn "nemo"; }
@@ -372,11 +383,12 @@ binds {
     // Volume Down (Page Down) - Diminui 5%
     "Page_Down" { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
 
-    "Delete" { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    //"Delete" { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     }
 
 
     window-rule {
     match app-id="org.qbittorrent.qBittorrent"
     open-floating true
-}
+    }
+

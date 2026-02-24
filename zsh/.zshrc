@@ -20,10 +20,12 @@ source $ZSH/oh-my-zsh.sh
 # Display Pokemon-colorscripts
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
 #pokemon-colorscripts --no-title -s -r #without fastfetch
-pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
+#pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
+
 
 # fastfetch. Will be disabled if above colorscript was chosen to install
-#fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
+#fastfetch -c $HOME/.config/fastfetch/config.jsonc
+#neofetch
 
 # Set-up icons for files/directories in terminal using lsd
 alias ls='lsd'
@@ -47,5 +49,7 @@ alias hx="/usr/bin/helix"
 eval "$(zoxide init zsh)"
 
 alias fixpad='echo "Reiniciando touchpad Dell I2C..." && sudo modprobe -r i2c_hid_acpi && sleep 1 && sudo modprobe i2c_hid_acpi && echo "Touchpad reiniciado!"'
+alias dotsync='cd ~/dotfiles && git add . && git commit -m "Sync: $(date +%Y-%m-%d\ %H:%M)" && git push'
 
 export PATH=$PATH:/home/guilherme/.spicetify
+export PATH="$HOME/.cargo/bin:$PATH"

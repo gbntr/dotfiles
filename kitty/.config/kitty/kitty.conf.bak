@@ -1,4 +1,4 @@
-include kitty-themes/custom-green.conf
+include kitty-themes/Espresso.conf
 
 font_family JetBrains Mono
 font_size 10
@@ -114,4 +114,10 @@ background_opacity		1
 #color7                  #a89984
 #color15                 #bdae93
 background_opacity 0.8
-background #000000
+# background #000000
+
+
+# BEGIN_KITTY_THEME
+# Adwaita dark
+include current-theme.conf
+# END_KITTY_THEME

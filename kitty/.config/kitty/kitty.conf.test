@@ -1,0 +1,35 @@
+# 1. Fonte e Tamanho
+font_family      JetBrains Mono
+font_size        11.0
+
+# 2. O SEGREDO DO VISUAL: Fundo Preto + Transparência
+background_opacity 0.8
+background       #000000
+foreground       #ffffff
+
+# 3. Cores Neon manuais (sem puxar arquivos externos)
+selection_background #ff79c6
+selection_foreground #000000
+url_color #8be9fd
+
+# Paleta Synthwave definida manualmente aqui
+color0  #21222c
+color8  #6272a4
+color1  #ff5555
+color9  #ff6e6e
+color2  #50fa7b
+color10 #69ff94
+color3  #f1fa8c
+color11 #ffffa5
+color4  #bd93f9
+color12 #d6acff
+color5  #ff79c6
+color13 #ff92df
+color6  #8be9fd
+color14 #a4ffff
+color7  #f8f8f2
+color15 #ffffff
+#include kitty-themes/SeaShells.conf
+confirm_os_window_close 0
+
+hide_window_decorations yes
