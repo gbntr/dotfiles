@@ -46,6 +46,7 @@ path=('/home/guilherme/.juliaup/bin' $path)
 export PATH
 export PATH="/usr/bin:$PATH"
 alias hx="/usr/bin/helix"
+alias shx="sudo -E helix"
 eval "$(zoxide init zsh)"
 
 alias fixpad='echo "Reiniciando touchpad Dell I2C..." && sudo modprobe -r i2c_hid_acpi && sleep 1 && sudo modprobe i2c_hid_acpi && echo "Touchpad reiniciado!"'

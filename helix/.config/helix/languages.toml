@@ -1,0 +1,24 @@
+[[language]]
+name = "julia"
+roots = ["Project.toml", "Manifest.toml", ".git"]
+
+[language-server.julia]
+command = "julia"
+args = [
+    "--startup-file=no",
+    "--history-file=no",
+    "--quiet",
+    "--project=@.", 
+    "-e",
+    "using LanguageServer; runserver()"
+]
+
+[[language]]
+name = "python"
+roots = ["pyproject.toml", "setup.py", "requirements.txt", ".git"]
+language-servers = ["pyright"] 
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+config = { python = { analysis = { typeCheckingMode = "basic", autoSearchPaths = true, useLibraryCodeForTypes = true } } }
