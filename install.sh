@@ -1,24 +1,33 @@
-
 #!/bin/bash
 
-# Encerra o script se houver erro
+# Encerra o script se houver erro crítico
 set -e
 
-# --- 1. DEFINIÇÃO DAS DEPENDÊNCIAS DE "SOFRIMENTO" (PLUMBING) ---
-# [cite_start]Baseado na sua lista de pacotes instalados [cite: 1, 2, 3, 4]
+# --- 0. TRAVA DE SEGURANÇA ---
+if [ "$EUID" -eq 0 ]; then
+    echo "ERRO: Por favor, não rode este script como root (sudo ./install.sh)."
+    echo "O makepkg e o yay bloqueiam compilações como root por segurança."
+    echo "Rode apenas: ./install.sh"
+    exit 1
+fi
 
-# Áudio (Pipewire completo)
-AUDIO_DEPS="pipewire pipewire-pulse wireplumber pipewire-alsa pipewire-jack"
+# --- 1. DEFINIÇÃO DAS DEPENDÊNCIAS ---
 
-# Sistema de Arquivos, Montagem e Lixeira (Para o Nemo funcionar 100%)
+# Áudio (Pipewire completo + EasyEffects da sua config)
+AUDIO_DEPS="pipewire pipewire-pulse wireplumber pipewire-alsa pipewire-jack easyeffects"
+
+# Sistema de Arquivos, Montagem e Lixeira (Para o Nemo que está no seu bind Mod+E)
 FS_DEPS="gvfs udisks2 nemo nemo-fileroller ffmpegthumbnailer ntfs-3g"
 
-# Autenticação e Integração Wayland (Para pedir senha root e compartilhar tela)
-# Você usa polkit-kde-agent e xdg-desktop-portal-gtk/gnome
-CORE_DEPS="polkit-kde-agent xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-keyring"
+# Autenticação e Integração Wayland
+CORE_DEPS="polkit-gnome xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-keyring"
 
 # Aparência e Fontes Essenciais
 FONT_DEPS="ttf-jetbrains-mono-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberation"
+
+# Kit Wayland + Niri + Ferramentas do seu config.kdl
+# Inclui Kitty, utilitários de print (grim, slurp, satty), lockscreen, brilho, clipboard e fallback
+WAYLAND_DEPS="niri-git xorg-xwayland xwayland-satellite wl-clipboard mako kitty jq brightnessctl grim slurp satty swaylock-effects-git rofi-wayland"
 
 # --- 2. PREPARAÇÃO DO SISTEMA ---
 
@@ -30,6 +39,9 @@ echo "2) Apenas Stow (Fallback/Outra distro)"
 read -r -p "Opção: " choice
 
 if [ "$choice" == "1" ]; then
+    echo ">>> Solicitando privilégios sudo para instalação base..."
+    sudo -v # Pede a senha do sudo agora e mantém ativa
+
     echo ">>> Atualizando sistema..."
     sudo pacman -Syu --noconfirm
     
@@ -38,7 +50,7 @@ if [ "$choice" == "1" ]; then
 
     # Instalação do Yay (se não existir)
     if ! command -v yay &> /dev/null; then
-        echo ">>> Yay não encontrado. Instalando..."
+        echo ">>> Yay não encontrado. Compilando do AUR..."
         git clone https://aur.archlinux.org/yay.git /tmp/yay
         cd /tmp/yay
         makepkg -si --noconfirm
@@ -46,12 +58,18 @@ if [ "$choice" == "1" ]; then
         rm -rf /tmp/yay
     fi
 
-    echo ">>> Instalando dependências de sistema (Áudio, FS, Polkit)..."
-    yay -S --needed --noconfirm $AUDIO_DEPS $FS_DEPS $CORE_DEPS $FONT_DEPS
+    echo ">>> Instalando dependências de sistema (Áudio, FS, Polkit, Wayland e Fontes)..."
+    yay -S --needed --noconfirm $AUDIO_DEPS $FS_DEPS $CORE_DEPS $FONT_DEPS $WAYLAND_DEPS
+
+    echo ">>> Tentando instalar Noctalia (Launcher Principal)..."
+    if yay -S --needed --noconfirm noctalia-shell; then
+        echo "✓ Noctalia instalado com sucesso."
+    else
+        echo "⚠️ Aviso: Falha ao instalar noctalia-shell. O sistema utilizará o rofi-wayland como fallback."
+    fi
 
 elif [ "$choice" == "2" ]; then
     echo ">>> Modo Fallback selecionado. Pulando instalação de dependências de sistema."
-    # Verifica se stow está instalado
     if ! command -v stow &> /dev/null; then
         echo "ERRO: GNU Stow não está instalado. Instale-o manualmente e rode novamente."
         exit 1
@@ -63,40 +81,34 @@ fi
 
 # --- 3. INSTALAÇÃO DE APPS E APLICAÇÃO DOS DOTFILES (STOW) ---
 
-# Pega a lista de pastas dentro de ~/dotfiles (ignorando .git e scripts)
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DOTFILES_DIR"
 FOLDERS=$(ls -d */ | cut -f1 -d'/' | grep -vE "^(\.git|scripts)$")
 
 echo ""
-echo ">>> Iniciando configuração dos pacotes..."
+echo ">>> Iniciando configuração dos pacotes e links (Stow)..."
 
 for app in $FOLDERS; do
     echo "--- Processando: $app ---"
     
-    # Lógica Automática: Tenta instalar o pacote com o mesmo nome da pasta
     if [ "$choice" == "1" ]; then
         if ! pacman -Qi "$app" &> /dev/null && ! yay -Qi "$app" &> /dev/null; then
             read -r -p "O pacote '$app' não parece instalado. Deseja instalar via yay? [s/n] " install_yn
             if [[ "$install_yn" =~ ^[Ss]$ ]]; then
-                # Tratamento especial para nomes diferentes (Ex: pasta 'niri' -> pacote 'niri-git')
                 PKG_NAME="$app"
                 case "$app" in
-                    niri) PKG_NAME="niri-git" ;;  # [cite_start]Você usa a versão git [cite: 3]
-                    zen)  PKG_NAME="zen-browser-bin" ;; # [cite_start]Você usa o bin do AUR [cite: 4]
-                    # Adicione outras exceções aqui se criar pastas com nomes diferentes dos pacotes
+                    niri) PKG_NAME="niri-git" ;;
+                    zen)  PKG_NAME="zen-browser-bin" ;;
                 esac
                 
-                yay -S --needed --noconfirm "$PKG_NAME"
+                yay -S --needed --noconfirm "$PKG_NAME" || echo "⚠️ Aviso: Falha ao compilar/instalar $PKG_NAME. Pulando a instalação, mas mantendo o link dos dotfiles."
             fi
         else
-            echo "✓ Pacote '$app' (ou similar) já detectado."
+            echo "✓ Pacote '$app' (ou similar) já detectado no sistema."
         fi
     fi
 
-    # Aplicação do Stow
-    echo "Aplicando configurações (stow)..."
-    # -D = Delete (remove links antigos para evitar conflito), -R = Restow (refaz links)
+    echo "Aplicando configurações do Stow para: $app..."
     stow -D "$app" 2>/dev/null || true 
     stow -R -t "$HOME" "$app"
 done
@@ -107,21 +119,13 @@ if [ "$choice" == "1" ]; then
     echo ""
     echo ">>> Ativando serviços do sistema..."
 
-    # Áudio
     systemctl --user enable --now pipewire pipewire-pulse wireplumber
     
-    # Serviços Específicos do Usuário (Noctalia, etc)
-    # Verificando se o noctalia está instalado antes de tentar ativar
     if pacman -Qi noctalia-shell &> /dev/null || yay -Qi noctalia-shell &> /dev/null; then
-        echo "Ativando Noctalia Shell..."
-        # Nota: O nome do serviço pode variar. Geralmente é app.service.
-        # Ajuste abaixo se o nome do serviço for diferente de 'noctalia-shell'
-        systemctl --user enable --now noctalia-shell.service 2>/dev/null || echo "Aviso: Não foi possível ativar noctalia-shell via systemd automaticamente. Verifique o nome do serviço."
+        echo "Ativando Noctalia Shell via systemd..."
+        systemctl --user enable --now noctalia-shell.service 2>/dev/null || echo "Aviso: Não foi possível ativar noctalia-shell via systemd automaticamente."
     fi
-
-    # Exemplo: Ativar Syncthing ou MPD se tiver no futuro
-    # systemctl --user enable --now syncthing
 fi
 
 echo ""
-echo "✅ Instalação concluída! Recomendado reiniciar o sistema."
+echo "✅ Setup concluído! O seu ambiente Niri + Wayland está pronto. É altamente recomendado reiniciar o sistema agora."
