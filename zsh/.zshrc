@@ -1,4 +1,4 @@
-# If you come from bash you might have to change your $PATH.
+# If you come from bash you might have to change your $PATH.TH
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export ZSH="$HOME/.oh-my-zsh"
@@ -54,3 +54,4 @@ alias dotsync='cd ~/dotfiles && git add . && git commit -m "Sync: $(date +%Y-%m-
 
 export PATH=$PATH:/home/guilherme/.spicetify
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

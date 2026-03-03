@@ -73,6 +73,26 @@ layout {
         bottom 0
         right 0        
     }
+
+}
+
+ blur {
+   passes 4        // more passes = stronger blur (default: 3)
+   offset 3.0      // sample distance per pass (default: 3.0)
+   noise 0.02      // grain overlay (default: 0.02)
+   //saturation 15.5 // color saturation boost (default: 1.5)
+}   
+
+window-rule {
+    background-effect {
+        blur true
+    }
+}
+
+layer-rule {
+    background-effect {
+        blur true
+    }
 }
 
 overview {
@@ -137,12 +157,12 @@ window-rule {
 }
 
 window-rule {
-    opacity 0.97
+    opacity 0.85
     match is-active=true
 }
 
 window-rule {
-    opacity 0.90
+    opacity 0.80
     match is-active=false
 }
 
