@@ -76,12 +76,14 @@ layout {
 
 }
 
- blur {
-   passes 4        // more passes = stronger blur (default: 3)
-   offset 3.0      // sample distance per pass (default: 3.0)
-   noise 0.02      // grain overlay (default: 0.02)
-   //saturation 15.5 // color saturation boost (default: 1.5)
-}   
+
+
+blur {
+    passes 4
+    offset 5.0
+    noise 0.015
+    saturation 1.6
+}
 
 window-rule {
     background-effect {
@@ -128,16 +130,11 @@ cursor {
 spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets,pkcs11,ssh"
-
-// Substituição Waybar/SwayNC por Noctalia
 spawn-at-startup "qs" "-c" "noctalia-shell"
-//spawn-at-startup "noctalia"
-
-//spawn-at-startup "swww-daemon"
-//spawn-at-startup "swww" "img" "/home/guilherme/Pictures/wallpapers/bluemontains.png" //"--resize-type" "stretch"
 spawn-at-startup "motrix"
+
+
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
@@ -422,3 +419,7 @@ binds {
     match app-id="org.qbittorrent.qBittorrent"
     open-floating true
     }
+
+
+include "./noctalia.kdl"
+

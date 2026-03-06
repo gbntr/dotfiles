@@ -1,8 +1,8 @@
-# If you come from bash you might have to change your $PATH.TH
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Caminhos do sistema e ferramentas locais
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.juliaup/bin:$HOME/.spicetify:$PATH"
 
+# Oh My Zsh e tema
 export ZSH="$HOME/.oh-my-zsh"
-
 ZSH_THEME="superjarin"
 
 plugins=(
@@ -14,44 +14,33 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Check archlinux plugin commands here
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/archlinux
+# Configuração de histórico
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
-# Display Pokemon-colorscripts
-# Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
-#pokemon-colorscripts --no-title -s -r #without fastfetch
-#pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
+# Atalhos básicos e editor
+alias hx="/usr/bin/helix"
+alias shx="sudo -E helix"
 
-
-# fastfetch. Will be disabled if above colorscript was chosen to install
-#fastfetch -c $HOME/.config/fastfetch/config.jsonc
-#neofetch
-
-# Set-up icons for files/directories in terminal using lsd
+# Substituindo ls pelo lsd
 alias ls='lsd'
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-# Set-up FZF key bindings (CTRL R for fuzzy history finder)
-source <(fzf --zsh)
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory
-
-path=('/home/guilherme/.juliaup/bin' $path)
-export PATH
-export PATH="/usr/bin:$PATH"
-alias hx="/usr/bin/helix"
-alias shx="sudo -E helix"
-eval "$(zoxide init zsh)"
-
+# Scripts pessoais
 alias fixpad='echo "Reiniciando touchpad Dell I2C..." && sudo modprobe -r i2c_hid_acpi && sleep 1 && sudo modprobe i2c_hid_acpi && echo "Touchpad reiniciado!"'
 alias dotsync='cd ~/dotfiles && git add . && git commit -m "Sync: $(date +%Y-%m-%d\ %H:%M)" && git push'
+alias wifi='nm-connection-editor && disown'
+# Rice (Desativados)
+#pokemon-colorscripts --no-title -s -r
+#pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
+#fastfetch -c $HOME/.config/fastfetch/config.jsonc
+#neofetch
 
-export PATH=$PATH:/home/guilherme/.spicetify
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+# Inicialização de ferramentas (Devem ficar no final)
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
