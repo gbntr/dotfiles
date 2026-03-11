@@ -35,6 +35,8 @@ alias lt='ls --tree'
 alias fixpad='echo "Reiniciando touchpad Dell I2C..." && sudo modprobe -r i2c_hid_acpi && sleep 1 && sudo modprobe i2c_hid_acpi && echo "Touchpad reiniciado!"'
 alias dotsync='cd ~/dotfiles && git add . && git commit -m "Sync: $(date +%Y-%m-%d\ %H:%M)" && git push'
 alias wifi='nm-connection-editor && disown'
+alias sdn='shutdown now'
+alias felipe='echo hmmmmm, esse gosta libera o butico'
 # Rice (Desativados)
 #pokemon-colorscripts --no-title -s -r
 #pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -

@@ -25,7 +25,7 @@ layout {
     background-color "#00000000"
     
     // Gaps (Espaçamento)
-    gaps 4
+    gaps 0
     
     center-focused-column "never"
     always-center-single-column
@@ -76,11 +76,13 @@ layout {
 
 }
 
-
+output "eDP-1" {
+    scale 1.0
+}
 
 blur {
     passes 4
-    offset 5.0
+    offset 1.7
     noise 0.015
     saturation 1.6
 }
@@ -105,7 +107,7 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     //DISPLAY ":0"
     XCURSOR_SIZE "20"
-    XCURSOR_THEME "Bibata-Modern-Ice"
+    XCURSOR_THEME "BibataCruz"
 
     // Força Thunar e apps GTK a não desenharem a barra de título
     //GTK_CSD "0"
@@ -121,7 +123,7 @@ hotkey-overlay {
 }
 
 cursor {
-    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-theme "BibataCruz"
     xcursor-size 20
 }
 
@@ -132,9 +134,7 @@ spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets,pkcs11,ssh"
 spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "motrix"
-
-
+//spawn-at-startup "motrix"
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
@@ -176,7 +176,7 @@ window-rule {
     match app-id="navigator"
     match app-id="browser"
     match app-id="librewolf"
-    match app-id="brave"
+    match app-id="brave-browser"
     match app-id="firefox"
 
     open-floating false
