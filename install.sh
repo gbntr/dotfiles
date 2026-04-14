@@ -27,7 +27,7 @@ FONT_DEPS="ttf-jetbrains-mono-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberatio
 
 # Kit Wayland + Niri + Ferramentas do seu config.kdl
 # Inclui Kitty, utilitários de print (grim, slurp, satty), lockscreen, brilho, clipboard e fallback
-WAYLAND_DEPS="niri-git xorg-xwayland xwayland-satellite wl-clipboard mako kitty jq brightnessctl grim slurp satty swaylock-effects-git rofi-wayland greetd dms-shell matugen"
+WAYLAND_DEPS="niri-git xorg-xwayland xwayland-satellite wl-clipboard kitty jq brightnessctl grim slurp satty swaylock-effects-git rofi-wayland greetd dms-shell matugen"
 
 # --- 2. PREPARAÇÃO DO SISTEMA ---
 
