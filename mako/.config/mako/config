@@ -1,0 +1,14 @@
+# Configuração Minimalista Mako
+anchor=top-right
+font=JetBrainsMono Nerd Font 12
+background-color=#1e1e2e
+text-color=#cdd6f4
+width=350
+height=150
+margin=10
+padding=15
+border-size=2
+border-color=#cba6f7
+border-radius=10
+default-timeout=5000
+icons=1

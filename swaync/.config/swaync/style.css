@@ -1,0 +1,30 @@
+* { font-family: "JetBrainsMono Nerd Font", monospace; font-weight: 600; }
+.control-center {
+    background: #11111b;
+    border: 2px solid #313244;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 14px;
+}
+.widget-buttons-grid {
+    padding: 0px 15px; /* Ajuste seguro */
+    margin: 10px 0;
+    background: transparent;
+}
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background: #313244; color: #cdd6f4; border-radius: 12px;
+    margin: 0px; padding: 0px; border: none;
+    min-height: 55px; min-width: 85px; /* Botões mais largos para preencher */
+}
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background: #cba6f7; color: #11111b;
+}
+.widget-volume, .widget-backlight, .widget-mpris, .widget-dnd {
+    background: #1e1e2e; border-radius: 12px; padding: 10px; margin-top: 10px;
+}
+scale trough { background: #313244; border-radius: 12px; min-height: 6px; }
+scale highlight { background: #cba6f7; border-radius: 12px; }
+.notification { background: #1e1e2e; border-radius: 12px; border: 1px solid #313244; margin: 6px 0; }
+.notification-content { padding: 10px; }
+.summary { color: #cba6f7; }
+.notification-action { background: #313244; color: #cdd6f4; border-radius: 8px; }
