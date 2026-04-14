@@ -36,7 +36,13 @@ alias fixpad='echo "Reiniciando touchpad Dell I2C..." && sudo modprobe -r i2c_hi
 alias dotsync='cd ~/dotfiles && git add . && git commit -m "Sync: $(date +%Y-%m-%d\ %H:%M)" && git push'
 alias wifi='nm-connection-editor && disown'
 alias sdn='shutdown now'
-alias felipe='echo hmmmmm, esse gosta libera o butico'
+alias felipe='echo hmmmmm, esse libera o butico'
+alias upkey='sudo pacman -Sy archlinux-keyring cachyos-keyring'
+# Alias para troca rápida de Timezone
+alias tzbr="sudo timedatectl set-timezone America/Sao_Paulo && echo 'Timezone: Brasil (SP)'"
+alias tzus="sudo timedatectl set-timezone America/New_York && echo 'Timezone: US (Eastern/Washington)'"
+alias tzchi="sudo timedatectl set-timezone America/Chicago && echo 'Timezone: US (Central/Chicago)'"
+alias jose='echo "o tal do mc lobisomen"'
 # Rice (Desativados)
 #pokemon-colorscripts --no-title -s -r
 #pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -

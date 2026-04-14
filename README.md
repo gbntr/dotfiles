@@ -13,9 +13,10 @@ O gerenciamento é feito via **GNU Stow**, permitindo a criação de links simb�
 
 ### Destaques do Setup
 * **WM:** Niri (Wayland)
+* **DM:** greetd + dms-greeter
 * **Terminal:** Kitty + Zsh + Starship
 * **Editor:** Helix
-* **File Manager:** Yazi & Nemo
+* **File Manager:** Yazi & Nautilus
 * **Browser:** Zen Browser / Firefox
 * **Shell Theme:** Pokemon-colorscripts + Noctalia
 
@@ -66,9 +67,10 @@ Management is handled via **GNU Stow**, allowing for modular and clean symbolic 
 
 ### Setup Highlights
 * **WM:** Niri (Wayland)
+* **DM:** greetd + dms-greeter
 * **Terminal:** Kitty + Zsh + Starship
 * **Editor:** Helix
-* **File Manager:** Yazi & Nemo
+* **File Manager:** Yazi & Nautilus
 * **Browser:** Zen Browser / Firefox
 * **Shell Theme:** Pokemon-colorscripts + Noctalia
 

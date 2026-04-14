@@ -16,8 +16,8 @@ fi
 # Áudio (Pipewire completo + EasyEffects da sua config)
 AUDIO_DEPS="pipewire pipewire-pulse wireplumber pipewire-alsa pipewire-jack easyeffects"
 
-# Sistema de Arquivos, Montagem e Lixeira (Para o Nemo que está no seu bind Mod+E)
-FS_DEPS="gvfs udisks2 nemo nemo-fileroller ffmpegthumbnailer ntfs-3g"
+# Sistema de Arquivos, Montagem e Lixeira (Para o Nautilus que está no seu bind Mod+E)
+FS_DEPS="gvfs udisks2 nautilus nautilus-share ffmpegthumbnailer ntfs-3g"
 
 # Autenticação e Integração Wayland
 CORE_DEPS="polkit-gnome xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-keyring"
@@ -27,7 +27,7 @@ FONT_DEPS="ttf-jetbrains-mono-nerd noto-fonts-emoji noto-fonts-cjk ttf-liberatio
 
 # Kit Wayland + Niri + Ferramentas do seu config.kdl
 # Inclui Kitty, utilitários de print (grim, slurp, satty), lockscreen, brilho, clipboard e fallback
-WAYLAND_DEPS="niri-git xorg-xwayland xwayland-satellite wl-clipboard mako kitty jq brightnessctl grim slurp satty swaylock-effects-git rofi-wayland"
+WAYLAND_DEPS="niri-git xorg-xwayland xwayland-satellite wl-clipboard mako kitty jq brightnessctl grim slurp satty swaylock-effects-git rofi-wayland greetd dms-shell matugen"
 
 # --- 2. PREPARAÇÃO DO SISTEMA ---
 
@@ -59,7 +59,7 @@ if [ "$choice" == "1" ]; then
     fi
 
     echo ">>> Instalando dependências de sistema (Áudio, FS, Polkit, Wayland e Fontes)..."
-    yay -S --needed --noconfirm $AUDIO_DEPS $FS_DEPS $CORE_DEPS $FONT_DEPS $WAYLAND_DEPS
+    yay -S --needed --noconfirm $AUDIO_DEPS $FS_DEPS $CORE_DEPS $FONT_DEPS $WAYLAND_DEPS greetd-dms-greeter-git
 
     echo ">>> Tentando instalar Noctalia (Launcher Principal)..."
     if yay -S --needed --noconfirm noctalia-shell; then
@@ -124,6 +124,14 @@ if [ "$choice" == "1" ]; then
     if pacman -Qi noctalia-shell &> /dev/null || yay -Qi noctalia-shell &> /dev/null; then
         echo "Ativando Noctalia Shell via systemd..."
         systemctl --user enable --now noctalia-shell.service 2>/dev/null || echo "Aviso: Não foi possível ativar noctalia-shell via systemd automaticamente."
+    fi
+
+    # Configuração do Greeter DMS
+    if command -v dms &> /dev/null; then
+        echo ">>> Configurando Greeter DMS..."
+        sudo systemctl disable ly.service 2>/dev/null || true
+        sudo dms greeter enable 2>/dev/null || echo "Aviso: Falha ao ativar o greeter dms. Verifique se greetd-dms-greeter-git está instalado."
+        dms greeter sync 2>/dev/null || true
     fi
 fi
 
