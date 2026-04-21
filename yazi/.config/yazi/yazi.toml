@@ -8,18 +8,20 @@ spread = [
 ]
 
 [open]
-rules = [
+prepend_rules = [
     # Regra 1: Força bruta para arquivos vazios (inode/x-empty)
     { mime = "inode/*", use = "edit" },
     
     # Regra 2: Seus arquivos CSV
-    { name = "*.csv", use = "spread" },
+    { url = "*.csv", use = "spread" },
     
     # Regra 3: Textos gerais
-    { mime = "text/*", use = "edit" },
-    
+    { mime = "text/*", use = "edit" }
+]
+
+append_rules = [
     # Regra 4: Fallback (Última tentativa)
-    { name = "*", use = "edit" }
+    { url = "*", use = "edit" }
 ]
 
 [mgr]

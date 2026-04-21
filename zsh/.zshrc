@@ -52,3 +52,12 @@ alias jose='echo "o tal do mc lobisomen"'
 # Inicialização de ferramentas (Devem ficar no final)
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
+
+# Configuração GPG Agent para SSH
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
+
+# Garante que o SSH_AUTH_SOCK aponte para o gpg-agent (essencial para o i3wm + greetd)
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi

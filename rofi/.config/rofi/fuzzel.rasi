@@ -1,0 +1,80 @@
+/**
+ * Fuzzel-like theme for Rofi
+ * Clean, minimalist, centered.
+ **/
+
+* {
+    /* DMS Colors */
+    bg-col:  #141218;
+    fg-col:  #e6e0e9;
+    accent-col: #d0bcff;
+    selected-col: #381e72;
+    
+    background-color: @bg-col;
+    text-color: @fg-col;
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    height: 300px;
+    width: 600px;
+    border: 2px;
+    border-color: @accent-col;
+    border-radius: 12px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    padding: 10px;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+    background-color: @bg-col;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @accent-col;
+    padding: 6px;
+    text-color: @bg-col;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 6px;
+    margin: 10px 0px 10px 10px;
+    text-color: @fg-col;
+    background-color: @bg-col;
+}
+
+listview {
+    border: 0px 0px 0px;
+    padding: 6px 0px 0px;
+    margin: 10px 0px 0px 20px;
+    columns: 1;
+    lines: 10;
+}
+
+element {
+    padding: 5px;
+    background-color: @bg-col;
+    text-color: @fg-col;
+    border-radius: 5px;
+}
+
+element-icon {
+    size: 25px;
+}
+
+element selected {
+    background-color:  @selected-col;
+    text-color: @accent-col;
+}

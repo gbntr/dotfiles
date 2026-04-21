@@ -1,0 +1,35 @@
+/**
+ * Wallpaper Picker theme
+ * Grid layout with large icons
+ **/
+
+@import "fuzzel.rasi"
+
+window {
+    height: 600px;
+    width: 900px;
+}
+
+listview {
+    columns: 3;
+    lines: 4;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+    fixed-columns: true;
+}
+
+element {
+    orientation: vertical;
+    padding: 15px;
+}
+
+element-icon {
+    size: 150px;
+    horizontal-align: 0.5;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
