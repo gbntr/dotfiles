@@ -1,0 +1,102 @@
+// --- Global Window Rules ---
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+window-rule {
+    match is-active=true
+    opacity 0.9
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.85
+}
+
+// --- Per-app fixes ---
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+window-rule {
+    match app-id=r#"^(firefox|zen|zen-alpha)$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^(zen|zen-alpha|navigator)$"#
+    open-floating false
+    default-column-width { proportion 1.0; }
+    opacity 0.9
+}
+
+window-rule {
+    match app-id="Motrix"
+    open-floating true
+}
+
+window-rule {
+    match app-id="org.qbittorrent.qBittorrent"
+    open-floating true
+}
+
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+}
+
+// --- Floating apps ---
+window-rule {
+    match title=r#"Renomear"#
+    match title=r#"Rename"#
+    match title=r#"Confirmar"#
+    match title=r#"Confirm"#
+    match title=r#"Progresso"#
+    match title=r#"Progress"#
+    match title=r#"Propriedades"#
+    match title=r#"Properties"#
+    match title=r#"Copy"#
+    match title=r#"Copiar"#
+    match title=r#"Copiando"#
+    
+    // Portals
+    match title=r#"Abrir"#
+    match title=r#"Open"#
+    match title=r#"Salvar"#
+    match title=r#"Save"#
+    match app-id=r#"xdg-desktop-portal-gtk"#
+    match app-id=r#"xdg-desktop-portal-gnome"#
+    match app-id=r#"polkit-gnome-authentication-agent-1"#
+    
+    open-floating true
+}
+
+window-rule {
+    match app-id="pavucontrol"
+    match app-id="com.saivert.pwvucontrol"
+    open-floating true
+}
+
+layer-rule {
+    match namespace="quickshell:iiBackdrop"
+    place-within-backdrop true
+    opacity 1.0
+}
+
+layer-rule {
+    match namespace="quickshell:wBackdrop"
+    place-within-backdrop true
+    opacity 1.0
+}
+
+layer-rule {
+    match namespace="launcher"
+    background-effect {
+        blur true
+        xray false
+    }
+    opacity 0.5
+    geometry-corner-radius 12
+}

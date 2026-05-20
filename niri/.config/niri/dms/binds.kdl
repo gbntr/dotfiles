@@ -1,0 +1,127 @@
+binds {
+    // === Session & Overview ===
+    Mod+Tab repeat=false { toggle-overview; }
+    Mod+Shift+E { quit; }
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+O { power-off-monitors; }
+    Mod+Shift+P { power-off-monitors; }
+
+    // === DMS / iNiR Overlays ===
+    Mod+D { spawn "fuzzel" "--namespace" "launcher"; }
+    Mod+Shift+D { spawn "dms" "ipc" "launcher" "toggle"; }
+    Mod+Space { toggle-window-floating; }
+    Mod+V { spawn "bash" "-c" "cliphist list | fuzzel -d --namespace launcher | cliphist decode | wl-copy"; }
+    // Mod+Comma { spawn "/home/guilherme/.local/bin/inir" "settings"; }
+    // Mod+Slash { spawn "/home/guilherme/.local/bin/inir" "cheatsheet" "toggle"; }
+    Mod+Alt+Space { switch-layout "next"; }
+    
+    // Toggle Blur
+    Mod+Shift+B { spawn "/home/guilherme/.config/niri/scripts/toggle-blur.sh"; }
+
+    // === App Launchers ===
+    Mod+Return { spawn "kitty"; }
+    Mod+T      { spawn "kitty"; }
+    Mod+B      { spawn "zen-browser"; }
+    Mod+E      { spawn "thunar"; }
+
+    // === Window Management ===
+    Mod+Q repeat=false { close-window; }
+    Mod+A { maximize-column; }
+    Mod+F { fullscreen-window; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    // === Audio Control (Requested) ===
+    Mod+Page_Up   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    Mod+Page_Down { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    Mod+Home      { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+
+    // === Navigation (Vim + Arrows) ===
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-or-workspace-up; }
+    Mod+Down  { focus-window-or-workspace-down; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-or-workspace-down; }
+    Mod+K     { focus-window-or-workspace-up; }
+    Mod+L     { focus-column-right; }
+
+    // === Movement (Vim + Arrows) ===
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+    Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+    Mod+Shift+L     { move-column-right; }
+
+    // === Resizing (Vim Style) ===
+    Mod+Ctrl+H { set-column-width "-10%"; }
+    Mod+Ctrl+J { set-window-height "+10%"; }
+    Mod+Ctrl+K { set-window-height "-10%"; }
+    Mod+Ctrl+L { set-column-width "+10%"; }
+
+    // === Column & Sizing (General) ===
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+    Mod+C { center-column; }
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+    // === Workspaces ===
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+
+    // === Mouse Wheel ===
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { focus-column-right; }
+    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { focus-column-left; }
+
+    // === Screenshots ===
+    Mod+S { spawn "bash" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
+    Print { spawn "bash" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
+
+    // === Hardware Keys ===
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "5%+"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
+
+    XF86AudioPlay  { spawn "playerctl" "play-pause"; }
+    XF86AudioPause { spawn "playerctl" "play-pause"; }
+    XF86AudioNext  { spawn "playerctl" "next"; }
+    XF86AudioPrev  { spawn "playerctl" "previous"; }
+
+    // === Quick Restarts ===
+    Mod+Alt+R { spawn "niri" "msg" "action" "load-config-file"; }
+    Mod+Alt+C { spawn "niri" "msg" "action" "load-config-file"; }
+}

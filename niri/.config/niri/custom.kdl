@@ -1,0 +1,25 @@
+// --- Personal Customizations ---
+
+layout {
+    preset-column-widths {
+        proportion 0.22
+        proportion 0.50
+        proportion 0.78
+        proportion 1.00
+    }
+    
+    // Aligns the focused column to the center of the screen only when it's the only one.
+    always-center-single-column true
+    
+    // Do not center every focused window if there are multiple columns.
+    center-focused-column "never"
+}
+
+cursor {
+    // Para aumentar a sensibilidade do "shake to find", DIMINUA o threshold.
+    // O padrão no seu sistema (dms/input.kdl) é 2000.0.
+    shake-to-enlarge {
+        threshold 1200.0 // Quanto menor, mais sensível ao balanço
+        zoom-factor 4.0   // O quanto o cursor aumenta (padrão 3.0)
+    }
+}

@@ -1,0 +1,30 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// iNiR / DMS — Niri Compositor Configuration
+// ─────────────────────────────────────────────────────────────────────────────
+
+config-notification {
+    disable-failed
+}
+
+prefer-no-csd
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// --- DMS Specific Includes ---
+include "dms/env.kdl"
+include "dms/input.kdl"
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/animations.kdl"
+include "dms/windowrules.kdl"
+include "dms/blur.kdl"
+include "dms/binds.kdl"
+include "dms/startup.kdl"
+include "dms/alttab.kdl"
+include "dms/outputs.kdl"
+
+include "custom.kdl"
